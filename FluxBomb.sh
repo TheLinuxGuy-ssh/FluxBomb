@@ -68,11 +68,13 @@ init_environ(){
 
 install_deps(){
     
-    packages=(openssl git $PYTHON $PYTHON-pip figlet toilet)
+    packages=(openssl git $PYTHON $PYTHON-pip figlet toilet python)
     if [ -n "$INSTALL" ];then
         for package in ${packages[@]}; do
             $SUDO $INSTALL $package
         done
+        $PYTHON -m venv ./ENV
+        source ENV/bin/activate
         $PIP install -r requirements.txt
     else
         echo "We could not install dependencies."
@@ -93,7 +95,7 @@ else
     echo .
     echo .
     install_deps
-    echo This Script Was Made By SpeedX > .update
+    echo This Script Was Made By TheLinuxGuy > .update
     echo 'Requirements Installed....'
     pause
 fi
